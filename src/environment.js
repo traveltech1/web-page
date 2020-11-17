@@ -1,0 +1,1 @@
+export const API = 'https://travel-tech-strapi.herokuapp.com';

@@ -17,9 +17,10 @@ import secondImg from '../../assets/images/pexelsphoto1367170.jpeg';
 import ThirdImg from '../../assets/images/pexelsphoto1054289.jpeg';
 import FourImg from '../../assets/images/pexelsphoto167684.jpeg';
 import { endpoints } from '../../endpoints/endpoints'
+import { BrowserRouter as Link } from 'react-router-dom';
 
 
-function Main() {
+function Main(props) {
   const [componentSize, setComponentSize] = useState('large');
   const [cities, setCities] = useState(null);
   const [tripTypes, setTripTypes] = useState(null);
@@ -42,6 +43,8 @@ function Main() {
   const onFormLayoutChange = ({ size }) => {
     setComponentSize(size);
   };
+
+  console.log('PROPS', props)
 
   return (
     <div style={{
@@ -134,7 +137,7 @@ We are a nationwide charter service that serves Springfield, Branson and the sur
             </Select>
           </Form.Item>
           <Form.Item style={{textAlign: 'center', width: '90vw'}}>
-            <Button style={{backgroundColor: '#f23e3e', fontSize: 14, height: 50, borderColor: '#f23e3e', color: 'white', fontWeight: '500', paddingTop: 5, width: 200, alignSelf: 'center'}} shape="round" size={'large'}>
+            <Button onClick={() => props.history.push('/payment')} style={{backgroundColor: '#f23e3e', fontSize: 14, height: 50, borderColor: '#f23e3e', color: 'white', fontWeight: '500', paddingTop: 5, width: 200, alignSelf: 'center'}} shape="round" size={'large'}>
               REQUEST A HOST
             </Button>
           </Form.Item>

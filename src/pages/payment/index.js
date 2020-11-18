@@ -33,7 +33,13 @@ function Payment() {
   };
 
   return (
-    <div className="App">
+    <div style={{
+      backgroundColor: '#282c34',
+      minHeight: '100vh',
+      display: 'flex',
+      flexDirection: 'column',
+      color: 'white',
+      }}>
       <div style={{backgroundColor: '#f29720'}}>
         <h2 style={{ height: '100%', fontSize: 30, paddingInlineStart: 40, margin: 14, marginTop: 9, verticalAlign: 'center', color: 'white'}}>TravelTech</h2>
       </div>

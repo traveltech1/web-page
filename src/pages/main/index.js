@@ -44,11 +44,23 @@ function Main() {
   };
 
   return (
-    <div className="App">
+    <div style={{
+      backgroundColor: '#282c34',
+      minHeight: '100vh',
+      display: 'flex',
+      flexDirection: 'column',
+      color: 'white',
+      }}>
       <div style={{backgroundColor: '#f29720'}}>
         <h2 style={{ height: '100%', fontSize: 30, paddingInlineStart: 40, margin: 14, marginTop: 9, verticalAlign: 'center', color: 'white'}}>TravelTech</h2>
       </div>
-      <div className="imgDiv">
+      <div style={{
+        backgroundImage: `url(${firstImg})`,
+        height: 700,
+        objectFit: "fill",
+        backgroundSize: 'cover',
+        width: '100%'
+        }}>
         <div style={{textAlign: 'center', height: '100%', paddingTop: '5%', paddingBottom: '5%'}}>
         <img src={logo} alt="second"/>
         <h2 style={{color: 'white', fontSize: 26, marginBottom: 50}}>We Are Travel Agency</h2>

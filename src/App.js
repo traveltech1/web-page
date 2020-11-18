@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Home from './pages/main';
 import Payment from './pages/payment';
-// import './App.css';
+import './App.css';
 
 export default () => (
   <Router>

@@ -20,6 +20,12 @@ function Payment() {
   const [componentSize, setComponentSize] = useState('large');
   const [host, setHost] = useState(null);
 
+  const [form] = Form.useForm();
+
+  const onFinish = (values) => {
+    console.log('Received values of form: ', values);
+  };
+
   useEffect(() => {
     async function fetchData() {
         const result = await endpoints.hosts.getHosts();
@@ -30,6 +36,38 @@ function Payment() {
 
   const onFormLayoutChange = ({ size }) => {
     setComponentSize(size);
+  };
+
+  const formItemLayout = {
+    labelCol: {
+      xs: {
+        span: 24,
+      },
+      sm: {
+        span: 8,
+      },
+    },
+    wrapperCol: {
+      xs: {
+        span: 24,
+      },
+      sm: {
+        span: 16,
+      },
+    },
+  };
+
+  const tailFormItemLayout = {
+    wrapperCol: {
+      xs: {
+        span: 24,
+        offset: 0,
+      },
+      sm: {
+        span: 16,
+        offset: 8,
+      },
+    },
   };
 
   return (
@@ -60,6 +98,10 @@ function Payment() {
           style={{ background: 'rgba(0, 0, 0, 0.7)', borderRadius: 6, paddingTop: 50, paddingBottom: 20}}
           onValuesChange={onFormLayoutChange}
           size={componentSize}
+          form={form}
+          scrollToFirstError
+          name="register"
+          onFinish={onFinish}
         >
         <Form.Item label={<h3 style={{textShadow: 'rgb(143 143 143) 2px 2px 4px', color: 'white', fontSize: 18}}>Anfitrión</h3>}>
             <Select placeholder="Selecciona un anfitrión">

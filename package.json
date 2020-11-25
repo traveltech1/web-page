@@ -1,5 +1,6 @@
 {
   "name": "travel-web",
+  "homepage": "https://traveltech.com.co/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

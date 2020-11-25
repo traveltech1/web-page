@@ -11,11 +11,11 @@ import {
   TreeSelect,
   Switch, } from 'antd';
   import React, { useState, useEffect } from 'react';
-import firstImg from '../../assets/images/pexelsphoto114251.jpeg';
-import logo from '../../assets/images/logo.png';
-import secondImg from '../../assets/images/pexelsphoto1367170.jpeg';
-import ThirdImg from '../../assets/images/pexelsphoto1054289.jpeg';
-import FourImg from '../../assets/images/pexelsphoto167684.jpeg';
+import firstImg from '../../assets/images/0.jpg';
+import logo from '../../assets/images/travelTech.jpg';
+import secondImg from '../../assets/images/1.jpg';
+import ThirdImg from '../../assets/images/2.jpg';
+import FourImg from '../../assets/images/4.jpg';
 import { endpoints } from '../../endpoints/endpoints'
 import { BrowserRouter as Link } from 'react-router-dom';
 
@@ -83,7 +83,7 @@ function Main(props) {
       color: 'white',
       }}>
       <div style={{backgroundColor: '#f29720'}}>
-        <h2 style={{ height: '100%', fontSize: 30, paddingInlineStart: 40, margin: 14, marginTop: 9, verticalAlign: 'center', color: 'white'}}>TravelTech</h2>
+        <img width="100px" style={{ height: '100%', paddingInlineStart: 40, margin: 14, marginTop: 9, verticalAlign: 'center', color: 'white'}} src={logo}/>
       </div>
       <div style={{
         backgroundImage: `url(${firstImg})`,
@@ -94,9 +94,11 @@ function Main(props) {
         }}>
         <div style={{textAlign: 'center', height: '100%', paddingTop: '5%', paddingBottom: '5%'}}>
         <img src={logo} alt="second"/>
-        <h2 style={{color: 'white', fontSize: 26, marginBottom: 50}}>We Are Travel Agency</h2>
+        <p style={{color: 'white', fontSize: 26, marginBottom: 50}}><b>TRAVELTECH</b> CONECTANDO EL MUNDO A TRAVÉS DE PERSONAS.
+        El anfitrión perfecto en el destino al que vas. Un match perfecto.
+        </p>
         <Button style={{backgroundColor: '#f29720', fontSize: 14, height: 60, borderColor: '#f29720', color: 'white', fontWeight: '500', paddingTop: 5, width: 200}} shape="round" size={'large'}>
-          REQUEST A HOST
+          Quiero un Anfitrión
         </Button>
         </div>
       </div>

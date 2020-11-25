@@ -24,6 +24,40 @@ function Payment() {
 
 
 
+  function buildEpaycoButton(amount) {
+    console.log('EPAYCOOO', window.ePayco)    
+    
+    const url = 'https://checkout.epayco.co/checkout.js';
+  
+    const script = document.createElement('script');
+    script.src =  url;
+    script.async = true;
+    script.setAttribute('data-epayco-key', '65afb5be48a6a50793901a14bc038c2f');
+    script.setAttribute('class', 'epayco-button');
+    script.setAttribute('data-epayco-amount', amount);
+    script.setAttribute('data-epayco-tax', '0');
+    script.setAttribute('data-epayco-tax-base', '0');
+    script.setAttribute('data-epayco-name', 'Solicitud de anfitrion');
+    script.setAttribute('data-epayco-description', 'Solicitud de anfitrion');
+    script.setAttribute('data-epayco-currency', 'cop');
+    script.setAttribute('data-epayco-country', 'CO');
+    script.setAttribute('data-epayco-test', 'true');
+    script.setAttribute('data-epayco-external', 'false');
+    script.setAttribute('data-epayco-response', '');
+    script.setAttribute('data-epayco-confirmation', '');
+    script.setAttribute('data-epayco-button', 'https://369969691f476073508a-60bf0867add971908d4f26a64519c2aa.ssl.cf5.rackcdn.com/btns/boton_carro_de_compras_epayco4.png');
+
+
+    // document.body.appendChild(script);
+    document.getElementById('firstDiv').appendChild(script);
+
+    return () => {
+      // document.body.removeChild(script);
+      document.getElementById('firstDiv').removeChild(script);
+      
+    }
+  }
+
   const onFinish = (values) => {
     console.log('Received values of form: ', values);
   };
@@ -86,7 +120,7 @@ function Payment() {
       <div style={{backgroundImage: `url(${ThirdImg})`, backgroundSize: 'cover', height: 800, objectFit: 'fit', width: '100%'}}>
         <div style={{ height: '100%', paddingTop: '3%', paddingRight: '20%', paddingLeft: '20%'}}>
         <h2 style={{color: 'white', textShadow: 'rgb(143 143 143) 2px 2px 4px', textAlign: 'center', fontSize: 36, marginBottom: 50}}>Our hosts will be your friends helping you enjoy your trip like a local</h2>
-          <Form
+          <Form id='firstDiv'
           labelCol={{
             span: 5,
           }}
@@ -134,6 +168,10 @@ function Payment() {
 
           </Form.Item>
         </Form>
+
+        <Button onClick={() => buildEpaycoButton(50000)} style={{backgroundColor: '#f29720', fontSize: 14, height: 60, borderColor: '#f29720', color: 'white', fontWeight: '500', paddingTop: 5, width: 200}} shape="round" size={'large'}>
+          PAGAR
+          </Button>
         </div>
       </div>
     </div>

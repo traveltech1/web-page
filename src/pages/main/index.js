@@ -3,16 +3,18 @@ import {
   Form,
   Input,
   Button,
+  Radio,
   Select,
+  Cascader,
   DatePicker,
   Row, Col, Checkbox
  } from 'antd';
 import React, { useState, useEffect } from 'react';
-import firstImg from '../../assets/images/pexelsphoto114251.jpeg';
-import logo from '../../assets/images/logo.png';
-import secondImg from '../../assets/images/pexelsphoto1367170.jpeg';
-import ThirdImg from '../../assets/images/pexelsphoto1054289.jpeg';
-import FourImg from '../../assets/images/pexelsphoto167684.jpeg';
+import firstImg from '../../assets/images/0.jpg';
+import logo from '../../assets/images/travelTech.jpg';
+import secondImg from '../../assets/images/1.jpg';
+import ThirdImg from '../../assets/images/2.jpg';
+import FourImg from '../../assets/images/4.jpg';
 import left from '../../assets/images/pexelsphoto1252869.jpeg';
 import Moon from '../../assets/images/moon.png';
 import { endpoints } from '../../endpoints/endpoints'
@@ -144,7 +146,7 @@ const Main = (props) => {
       color: 'white',
       }}>
       <div style={{backgroundColor: '#f29720'}}>
-        <h2 style={{ height: '100%', fontSize: 30, paddingInlineStart: 40, margin: 14, marginTop: 9, verticalAlign: 'center', color: 'white'}}>TravelTech</h2>
+        <img width="100px" style={{ height: '100%', paddingInlineStart: 40, margin: 14, marginTop: 9, verticalAlign: 'center', color: 'white'}} src={logo}/>
       </div>
 
       {/* =========== PRIMERA SECCIÓN ============= */}
@@ -183,7 +185,7 @@ const Main = (props) => {
               <li><h2 style={{textShadow: 'rgb(143 143 143) 2px 2px 4px', color: 'white'}}>Destinos locales: Tendrás la oportunidad de conocer lugares increíbles y poco tradicionales de la mano de locales.</h2></li>
               <li><h2 style={{textShadow: 'rgb(143 143 143) 2px 2px 4px', color: 'white'}}>Match: Dependiendo de tu tipo de viaje podrás escoger entres los diferentes anfitriones en tu lugar de destino y así decidir cual cumple con el objetivo de tu viaje.</h2></li>
               <li><h2 style={{textShadow: 'rgb(143 143 143) 2px 2px 4px', color: 'white'}}>En caso de emergencia: Contarás con el apoyo de nuestros anfitriones para ayudarte en cualquier caso de imprevisto, percance o emergencia que se presente durante tu viaje.</h2></li>
-            </ul>  
+            </ul>
           </Col>
         </Row>
       </Col>
@@ -201,7 +203,7 @@ const Main = (props) => {
               <li><h2 style={{textShadow: 'rgb(143 143 143) 2px 2px 4px', color: 'white'}}>Destinos locales: Tendrás la oportunidad de conocer lugares increíbles y poco tradicionales de la mano de locales.</h2></li>
               <li><h2 style={{textShadow: 'rgb(143 143 143) 2px 2px 4px', color: 'white'}}>Match: Dependiendo de tu tipo de viaje podrás escoger entres los diferentes anfitriones en tu lugar de destino y así decidir cual cumple con el objetivo de tu viaje.</h2></li>
               <li><h2 style={{textShadow: 'rgb(143 143 143) 2px 2px 4px', color: 'white'}}>En caso de emergencia: Contarás con el apoyo de nuestros anfitriones para ayudarte en cualquier caso de imprevisto, percance o emergencia que se presente durante tu viaje.</h2></li>
-            </ul>  
+            </ul>
           </Col>
         </Row>
       </Col>
@@ -300,7 +302,7 @@ const Main = (props) => {
           onFinish={onFinish}
           validateMessages={validateMessages}
         >
-          
+
             <Form.Item
             name="name"
             label={<h3 style={{textShadow: 'rgb(143 143 143) 2px 2px 4px', color: 'white', fontSize: 18, marginBottom: -10 }}
@@ -376,7 +378,7 @@ const Main = (props) => {
             </Button>
           </Form.Item>
         </Form>}
-      
+
         </div>
         </div>
       </div>

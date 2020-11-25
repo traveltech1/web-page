@@ -1,1 +1,2 @@
-export const API = 'https://travel-tech-strapi.herokuapp.com';
+
+export const API = 'https://travel-tech.herokuapp.com';

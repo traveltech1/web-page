@@ -22,6 +22,8 @@ function Payment() {
 
   const [form] = Form.useForm();
 
+
+
   const onFinish = (values) => {
     console.log('Received values of form: ', values);
   };
@@ -128,9 +130,8 @@ function Payment() {
             <DatePicker style={{width: 200}} defaultValue={moment('01/2015', monthFormat)} format={monthFormat} picker="month" />
           </Form.Item>
           <Form.Item style={{textAlign: 'center', width: '90vw'}}>
-            <Button style={{backgroundColor: '#f23e3e', fontSize: 14, height: 50, borderColor: '#f23e3e', color: 'white', fontWeight: '500', paddingTop: 5, width: 200, alignSelf: 'center'}} shape="round" size={'large'}>
-              PAGAR
-            </Button>
+            
+
           </Form.Item>
         </Form>
         </div>

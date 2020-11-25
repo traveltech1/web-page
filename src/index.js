@@ -1,12 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { ConfigProvider } from 'antd';
+import esES from 'antd/lib/locale-provider/es_ES';
 // import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+     <ConfigProvider locale={esES}>
+        <App />
+    </ConfigProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

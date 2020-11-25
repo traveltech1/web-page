@@ -16,13 +16,15 @@ import moment from 'moment';
 
 const monthFormat = 'MM/YYYY';
 
-function Payment() {
+function Payment(props) {
   const [componentSize, setComponentSize] = useState('large');
   const [host, setHost] = useState(null);
 
   const [form] = Form.useForm();
 
+  const prevData = localStorage.getItem('values') !== undefined &&  JSON.parse(localStorage.getItem('values'));
 
+  console.log('LOS PROPS', props, prevData);
 
   function buildEpaycoButton(amount) {
     console.log('EPAYCOOO', window.ePayco)    
@@ -139,34 +141,7 @@ function Payment() {
           name="register"
           onFinish={onFinish}
         >
-        <Form.Item label={<h3 style={{textShadow: 'rgb(143 143 143) 2px 2px 4px', color: 'white', fontSize: 18}}>Anfitrión</h3>}>
-            <Select placeholder="Selecciona un anfitrión">
-              {
-                host?.map(hst =>{
-                  return (
-                  <Select.Option key={hst.id} value={hst.id}>{hst.name}</Select.Option>
-                  )
-                })
-              }
-            </Select>
-          </Form.Item>
-          <h3 style={{textShadow: 'rgb(143 143 143) 2px 2px 4px', color: 'white', fontSize: 28, marginLeft: '5%', marginBottom: 30}}>Datos de Pago</h3>
-          <Form.Item label={<h3 style={{textShadow: 'rgb(143 143 143) 2px 2px 4px', color: 'white', fontSize: 18}}>Nombre</h3>}>
-            <Input placeholder="Jhoe Donald"/>
-          </Form.Item>
-          <Form.Item label={<h3 style={{textShadow: 'rgb(143 143 143) 2px 2px 4px', color: 'white', fontSize: 18}}>No Tarjeta</h3>}>
-            <Input placeholder="4555 0000 4444 7777"/>
-          </Form.Item>
-          <Form.Item label={<h3 style={{textShadow: 'rgb(143 143 143) 2px 2px 4px', color: 'white', fontSize: 18}}>CVV</h3>}>
-            <Input style={{width: 200}}/>
-          </Form.Item>
-          <Form.Item label={<h3 style={{textShadow: 'rgb(143 143 143) 2px 2px 4px', color: 'white', fontSize: 18}}>Fecha Exp</h3>}>
-            <DatePicker style={{width: 200}} defaultValue={moment('01/2015', monthFormat)} format={monthFormat} picker="month" />
-          </Form.Item>
-          <Form.Item style={{textAlign: 'center', width: '90vw'}}>
-            
 
-          </Form.Item>
         </Form>
 
         <Button onClick={() => buildEpaycoButton(50000)} style={{backgroundColor: '#f29720', fontSize: 14, height: 60, borderColor: '#f29720', color: 'white', fontWeight: '500', paddingTop: 5, width: 200}} shape="round" size={'large'}>

@@ -15,6 +15,8 @@ import ThirdImg from '../../assets/images/pexelsphoto1054289.jpeg';
 import FourImg from '../../assets/images/pexelsphoto167684.jpeg';
 import left from '../../assets/images/pexelsphoto1252869.jpeg';
 import Moon from '../../assets/images/moon.png';
+import pink from '../../assets/images/pexelsphoto934718.jpeg';
+import gray from '../../assets/images/pexelsphoto1624504.jpeg';
 import { endpoints } from '../../endpoints/endpoints'
 import { BrowserRouter as Link } from 'react-router-dom';
 import moment from 'moment';
@@ -271,21 +273,58 @@ const Main = (props) => {
       </Col>
 
       {/* =========== CUARTA SECCIÓN ============= */}
-      <div style={{backgroundImage: `url(${ThirdImg})`, height: 700, backgroundSize: 'cover', width: '100%'}}>
-        <div style={{textAlign: 'center', height: '100%', paddingTop: '15%'}}>
-          <img src={logo} alt="second"/>
-        </div>
-      </div>
+      <Col xs={0} sm={0} md={24}
+        style={{backgroundImage: `url(${ThirdImg})`,
+        height: 700,
+        backgroundSize: 'cover',
+        width: '100%'}}>
+          <Row style={{height: '100%', background: 'rgba(0,0,0,0.5)'}}>
+            <Col xs={24} sm={24} md={8} style={{display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', height: '100%'}}>
+              <img src={pink} width={'90%'} height={'70%'} alt="one" />
+              <h2 style={{textShadow: 'rgb(143 143 143) 2px 2px 4px', color: 'white', marginTop: 20}}>
+              Alejandra Paz, Bordeaux – Francia
+              </h2>
+            </Col>
+            <Col xs={24} sm={24} md={8} style={{display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', height: '100%'}}>
+              <img src={gray}width={'90%'} height={'70%'} alt="two"/>
+              <h2 style={{textShadow: 'rgb(143 143 143) 2px 2px 4px', color: 'white', marginTop: 20}}>
+              Eren Yildiz, Qatar - Qatar
+              </h2>
+            </Col>
+            <Col xs={24} sm={24} md={8} style={{display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', height: '100%'}}>
+              <img src={FourImg} width={'90%'} height={'70%'} alt="three"/>
+              <h2 style={{textShadow: 'rgb(143 143 143) 2px 2px 4px', color: 'white', marginTop: 20}}>
+              Vitor Sampaio, Fortaleza – Brazil:
+              </h2>
+            </Col>
+          </Row>
+      </Col>
 
       {/* =========== QUINTA SECCIÓN ============= */}
-      <div style={{backgroundImage: `url(${ThirdImg})`, height: 700, backgroundSize: 'cover', width: '100%'}}>
-        <div style={{textAlign: 'center', height: '100%', paddingTop: '15%'}}>
-        <img src={logo} alt="second"/>
-        </div>
-      </div>
+      <Col xs={0} sm={0} md={24} style={{backgroundImage: `url(${gray})`, height: 700, backgroundSize: 'cover', width: '100%'}}>
+        <Row style={{textAlign: 'center', height: '100%', display: 'flex', background: 'rgba(0,0,0,0.3)'}}>
+          <Col xs={24} sm={24} md={12} style={{width: '50%', height: '100%', padding: '0px 20px 0px 20px', display: 'flex', justifyContent: 'flex-end', alignItems: 'center'}}>
+            <img src={FourImg} width={'97%'} alt="second"/>
+            <h1 style={{textShadow: 'rgb(143 143 143) 2px 2px 4px',position: 'absolute', width: 300, color: 'white', fontSize: 38, marginRight: 10}}>
+              ¿QUÉ ES LO MEJOR DE TRAVEL TECH?
+            </h1>
+          </Col>
+          <Col xs={24} sm={24} md={12} style={{width: '50%', height: '100%', padding: '0px 20px 0px 20px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', textAlign: 'left'}}>
+            <h2 style={{textShadow: 'rgb(143 143 143) 2px 2px 4px', color: 'white'/* , fontSize: 28 */}}>
+            ¿Alguna vez has tenido un poco de temor de conocer algún lugar porque no conoces su idioma, su cultura, su religión o sus costumbres? O, Durante tus viajes ¿Te gusta conocer personas nuevas?
+            </h2>
+            <h2 style={{textShadow: 'rgb(143 143 143) 2px 2px 4px', color: 'white'/* , fontSize: 28 */}}>
+            TravelTech es la nueva red mundial que esta revolucionando la conexión e interacción entre anfitriones locales y viajeros.
+            Brindamos un acompañamiento pre, durante y post-viaje, asegurando una experiencia inolvidable en donde tendrás la oportunidad de conocer lugares increíbles con la ayuda de nuestros anfritriones que con su experiencia y pasión por ayudarle a los viajeros te harán vivir una mejor experiencia.
+            Nuestros Anfitriones tienen diferentes características por eso podrás hacer el match perfecto con quien se adecua más a las tuyas. Te brindarán un acompañamiento según tus necesidades.
 
+            </h2>
+          </Col>
+        </Row>
+      </Col>
 
-      <div style={{backgroundImage: `url(${FourImg})`, backgroundSize: 'cover', height: 1000, objectFit: 'fit', width: '100%'}}>
+      {/* =========== SEXTA SECCIÓN ============= */}
+      <Col xs={24} sm={24} md={24} style={{backgroundImage: `url(${FourImg})`, backgroundSize: 'cover', height: 1000, objectFit: 'fit', width: '100%'}}>
         <div style={{ height: '100%', paddingRight: '20%', paddingLeft: '20%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
         <h1 style={{color: 'white', textShadow: 'rgb(143 143 143) 2px 2px 4px', textAlign: 'center', marginBottom: 20}}>Our hosts will be your friends helping you enjoy your trip like a local</h1>
         <div style={{ background: 'rgba(0, 0, 0, 0.7)', borderRadius: 6, paddingBottom: 20, paddingLeft: 20, paddingRight: 20, maxWidth: 600, minWidth: 300, width: '100%', paddingTop: 10}}>
@@ -379,7 +418,7 @@ const Main = (props) => {
       
         </div>
         </div>
-      </div>
+      </Col>
     </div>
   );
 }

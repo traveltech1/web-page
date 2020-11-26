@@ -55,5 +55,9 @@ export const endpoints = {
             const response = await makeRequest('/booking-requests', 'POST', payload);
             return response;
         },
+        putBooking: async (id, payload) => {
+            const response = await makeRequest(`/${id}/booking-requests`, 'PUT', payload);
+            return response;
+        },
     }
 };

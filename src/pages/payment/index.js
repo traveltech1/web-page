@@ -36,7 +36,7 @@ function Payment(props) {
     const script = document.createElement('script');
     script.src =  url;
     script.async = true;
-    script.setAttribute('data-epayco-key', '65afb5be48a6a50793901a14bc038c2f');
+    script.setAttribute('data-epayco-key', '072e6c48d7bfa1027afde26345d20d4a');
     script.setAttribute('class', 'epayco-button');
     script.setAttribute('data-epayco-amount', amount);
     script.setAttribute('data-epayco-tax', '0');
@@ -47,7 +47,8 @@ function Payment(props) {
     script.setAttribute('data-epayco-country', 'CO');
     script.setAttribute('data-epayco-test', 'true');
     script.setAttribute('data-epayco-external', 'false');
-    script.setAttribute('data-epayco-response', 'https://travel-web.vercel.app/payment');
+    script.setAttribute('data-epayco-response', 'http://localhost:3000/confirmation');
+    // script.setAttribute('data-epayco-response', 'https://travel-web.vercel.app/payment');
     script.setAttribute('data-epayco-confirmation', '');
     script.setAttribute('data-epayco-button', 'https://369969691f476073508a-60bf0867add971908d4f26a64519c2aa.ssl.cf5.rackcdn.com/btns/boton_carro_de_compras_epayco4.png');
 
@@ -58,7 +59,6 @@ function Payment(props) {
     return () => {
       // document.body.removeChild(script);
       document.getElementById('firstDiv').removeChild(script);
-      
     }
   }
 
@@ -98,12 +98,10 @@ function Payment(props) {
           "method": "string",
           "type": "string"
         }, */
-      });
 
-      if(result) {
-        setShowPay(false);
-        buildEpaycoButton(50000);
-      }
+      }).then( () => 
+        buildEpaycoButton(50000)
+      );
     }
   };
  

@@ -23,15 +23,13 @@ function Payment(props) {
   const [componentSize, setComponentSize] = useState('large');
   const [host, setHost] = useState(null);
   const [selected, setSelected] = useState(null);
+  const [showPay, setShowPay] = useState(true);
 
   const [form] = Form.useForm();
 
   const prevData = localStorage.getItem('values') !== undefined &&  JSON.parse(localStorage.getItem('values'));
 
-  console.log('LOS PROPS', props, prevData);
-
   function buildEpaycoButton(amount) {
-    console.log('EPAYCOOO', window.ePayco)    
     
     const url = 'https://checkout.epayco.co/checkout.js';
   
@@ -49,7 +47,7 @@ function Payment(props) {
     script.setAttribute('data-epayco-country', 'CO');
     script.setAttribute('data-epayco-test', 'true');
     script.setAttribute('data-epayco-external', 'false');
-    script.setAttribute('data-epayco-response', '');
+    script.setAttribute('data-epayco-response', 'http://localhost:3000/payment');
     script.setAttribute('data-epayco-confirmation', '');
     script.setAttribute('data-epayco-button', 'https://369969691f476073508a-60bf0867add971908d4f26a64519c2aa.ssl.cf5.rackcdn.com/btns/boton_carro_de_compras_epayco4.png');
 
@@ -73,7 +71,6 @@ function Payment(props) {
         const result = await endpoints.hosts.getHosts();
         setHost(result);
     };
-    buildEpaycoButton(50000);
     fetchData();
   }, []);
 
@@ -102,6 +99,11 @@ function Payment(props) {
           "type": "string"
         }, */
       });
+
+      if(result) {
+        setShowPay(false);
+        buildEpaycoButton(50000);
+      }
     }
   };
  
@@ -174,7 +176,6 @@ function Payment(props) {
             host?.map((item,index) => {
               return (
                 <Col key={item.id} style={{marginLeft: 10, marginRight: 10}}>
-                  {console.log('AJAAAA', host)}
                   <Card
                     onClick={() => setSelected(item)}
                     hoverable
@@ -191,9 +192,9 @@ function Payment(props) {
         <Form id='firstDiv' style={{marginTop: 20}}>
           {/* */}
         </Form>
-          <Button onClick={onBooking} style={{backgroundColor: '#f29720', fontSize: 14, height: 60, marginTop: 20, borderColor: '#f29720', color: 'white', fontWeight: '500', paddingTop: 5, width: 200}} shape="round" size={'large'}>
+          {showPay && <Button onClick={onBooking} style={{backgroundColor: '#f29720', fontSize: 14, height: 60, marginTop: 20, borderColor: '#f29720', color: 'white', fontWeight: '500', paddingTop: 5, width: 200}} shape="round" size={'large'}>
             Reserva
-          </Button>
+          </Button>}
         </div>
       </div>
     </div>

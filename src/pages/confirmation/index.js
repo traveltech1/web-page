@@ -4,10 +4,11 @@ import { endpoints } from '../../endpoints/endpoints'
 
 function Confirmation(props) {
   
-  const params = new URLSearchParams(global.location.search)
+  const params = new URLSearchParams(props.location.search);
   const ref_payco = params.get('ref_payco');
 
   useEffect(() => {    
+    console.log('confir', ' fetching data');
     async function fetchData() {
 
       await endpoints.bookingRequest.putBooking({
@@ -16,6 +17,7 @@ function Confirmation(props) {
         },
       });      
     };
+    fetchData();
 }, []);
 
 

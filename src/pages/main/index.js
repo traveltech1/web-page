@@ -9,7 +9,7 @@ import {
   DatePicker,
   Row, Col, Checkbox
  } from 'antd';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import firstImg from '../../assets/images/0.jpg';
 import logo from '../../assets/images/travelTech.jpg';
 import secondImg from '../../assets/images/1.jpg';
@@ -34,6 +34,12 @@ const Main = (props) => {
 
   const [form] = Form.useForm();
   const history = useHistory();
+
+  const toFormRef = useRef(null)
+
+  const scrollToBottom = () => {
+    toFormRef.current.scrollIntoView({ behavior: "smooth" })
+  }
 
   const onFinish = async (values) => {
     setCheckFields(false);
@@ -146,7 +152,7 @@ const Main = (props) => {
           <img src={logo} alt="second"/>
           <h1 style={{color: 'white', fontSize: 26, marginBottom: 0}}>TRAVELTECH CONECTANDO EL MUNDO A TRAVÉS DE PERSONAS</h1>
           <h3 style={{color: 'white', fontSize: 26, marginBottom: 50}}>El anfitrión perfecto en el destino al que vas. Un match perfecto</h3>
-          <Button style={{backgroundColor: '#f29720', fontSize: 14, height: 60, borderColor: '#f29720', color: 'white', fontWeight: '500', paddingTop: 5, width: 200}} shape="round" size={'large'}>
+          <Button onClick={scrollToBottom} style={{backgroundColor: '#f29720', fontSize: 14, height: 60, borderColor: '#f29720', color: 'white', fontWeight: '500', paddingTop: 5, width: 200}} shape="round" size={'large'}>
           QUIERO UN ANFITRIÓN
           </Button>
         </div>
@@ -312,7 +318,7 @@ const Main = (props) => {
       <Col xs={24} sm={24} md={24} style={{backgroundImage: `url(${FourImg})`, backgroundSize: 'cover', height: 1000, objectFit: 'fit', width: '100%'}}>
         <div style={{ height: '100%', paddingRight: '20%', paddingLeft: '20%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
         <h1 style={{color: 'white', textShadow: 'rgb(143 143 143) 2px 2px 4px', textAlign: 'center', marginBottom: 20}}>Our hosts will be your friends helping you enjoy your trip like a local</h1>
-        <div style={{ background: 'rgba(0, 0, 0, 0.7)', borderRadius: 6, paddingBottom: 20, paddingLeft: 20, paddingRight: 20, maxWidth: 600, minWidth: 300, width: '100%', paddingTop: 10}}>
+        <div ref={toFormRef} style={{ background: 'rgba(0, 0, 0, 0.7)', borderRadius: 6, paddingBottom: 20, paddingLeft: 20, paddingRight: 20, maxWidth: 600, minWidth: 300, width: '100%', paddingTop: 10}}>
         {cities && tripTypes &&
           <Form
           form={form}

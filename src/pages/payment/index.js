@@ -162,7 +162,7 @@ function Payment(props) {
           initialValues={{
             size: componentSize,
           }}
-          style={{ background: 'rgba(0, 0, 0, 0.3)', display: 'flex', flexDirection: 'row', borderRadius: 6, paddingTop: 50, paddingBottom: 20, overflowX: 'auto'}}
+          style={{display: 'flex', flexDirection: 'row', borderRadius: 6, paddingTop: 50, paddingBottom: 20, overflowX: 'auto'}}
           onValuesChange={onFormLayoutChange}
           size={componentSize}
           form={form}

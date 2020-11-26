@@ -10,15 +10,17 @@ import {
   Row, Col, Checkbox
  } from 'antd';
 import React, { useState, useEffect } from 'react';
-import firstImg from '../../assets/images/0.jpg';
-import logo from '../../assets/images/travelTech.jpg';
-import secondImg from '../../assets/images/1.jpg';
-import ThirdImg from '../../assets/images/2.jpg';
+import logo from '../../assets/images/travelTech.png';
+import final from '../../assets/images/1.jpg'
+import alejandra from '../../assets/images/alejandra.jpg';
+import angie from '../../assets/images/angie.jpg';
+import camilo from '../../assets/images/camilo.jpg';
+import chiara from '../../assets/images/chiara.jpg';
+import elaine from '../../assets/images/elaine.jpg';
+import eren from '../../assets/images/eren.jpg';
+import vitor from '../../assets/images/vitor.jpg';
 import FourImg from '../../assets/images/4.jpg';
 import left from '../../assets/images/pexelsphoto1252869.jpeg';
-import Moon from '../../assets/images/moon.png';
-import pink from '../../assets/images/pexelsphoto934718.jpeg';
-import gray from '../../assets/images/pexelsphoto1624504.jpeg';
 import { endpoints } from '../../endpoints/endpoints'
 import { BrowserRouter as Link } from 'react-router-dom';
 import moment from 'moment';
@@ -147,186 +149,240 @@ const Main = (props) => {
       flexDirection: 'column',
       color: 'white',
       }}>
-      <div style={{backgroundColor: '#f29720'}}>
-        <img width="100px" style={{ height: '100%', paddingInlineStart: 40, margin: 14, marginTop: 9, verticalAlign: 'center', color: 'white'}} src={logo}/>
-      </div>
 
       {/* =========== PRIMERA SECCIÓN ============= */}
-      <div style={{
-        backgroundImage: `url(${firstImg})`,
-        height: 700,
-        objectFit: "fill",
-        backgroundSize: 'cover',
-        width: '100%'
-        }}>
-        <div style={{textAlign: 'center', height: '100%', paddingTop: '5%', paddingBottom: '5%'}}>
-          <img src={logo} alt="second"/>
-          <h1 style={{color: 'white', fontSize: 26, marginBottom: 0}}>TRAVELTECH CONECTANDO EL MUNDO A TRAVÉS DE PERSONAS</h1>
-          <h3 style={{color: 'white', fontSize: 26, marginBottom: 50}}>El anfitrión perfecto en el destino al que vas. Un match perfecto</h3>
-          <Button style={{backgroundColor: '#f29720', fontSize: 14, height: 60, borderColor: '#f29720', color: 'white', fontWeight: '500', paddingTop: 5, width: 200}} shape="round" size={'large'}>
-          QUIERO UN ANFITRIÓN
-          </Button>
+
+        <div class="fixed-side-navbar">
+            <ul class="nav flex-column">
+                <li class="nav-item"><a class="nav-link" href="#home"><span>Intro</span></a></li>
+                <li class="nav-item"><a class="nav-link" href="#services"><span>Servicios</span></a></li>
+                <li class="nav-item"><a class="nav-link" href="#contact-us"><span>Contacto</span></a></li>
+                <li class="nav-item"><a class="nav-link" href="#portfolio"><span>Anfitriones</span></a></li>
+                <li class="nav-item"><a class="nav-link" href="#better"><span>Lo Mejor</span></a></li>
+                <li class="nav-item"><a class="nav-link" href="#anfitrion"><span>Solicítalo</span></a></li>
+            </ul>
+        </div>
+
+        <div class="parallax-content baner-content" id="home">
+            <div class="container">
+                <div class="first-content">
+                    <img width="550px" src={logo} style={{padding: '40px'}} /><br/>
+                    <span><em>TRAVELTECH, CONECTANDO EL MUNDO A TRAVÉS DE PERSONAS</em><br/>El anfitrión perfecto en el destino al que vas. Un match perfecto</span>
+                    <div class="primary-button">
+                        <a href="#anfitrion">QUIERO UN ANFITRIÓN</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+      {/* =========== SEGUNDA SECCIÓN ============= */}
+      <div class="service-content" id="services">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="left-text">
+                        <h4 style={{fontSize:'40px'}}>Qué Hacemos?</h4>
+                        <div class="line-dec"></div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="service-item">
+                                <h4>Idioma</h4>
+                                <div class="line-dec"></div>
+                                <p>Te contactaremos con un anfitrión que hable tu mismo idioma y te pueda ayudar a planear y acompañar durante tu viaje.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="service-item">
+                                <h4>Destinos locales</h4>
+                                <div class="line-dec"></div>
+                                <p>Tendrás la oportunidad de conocer lugares increíbles y poco tradicionales de la mano de locales.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="service-item">
+                                <h4>Match</h4>
+                                <div class="line-dec"></div>
+                                <p>Dependiendo de tu tipo de viaje podrás escoger entres los diferentes anfitriones en tu lugar de destino y así decidir cual cumple con el objetivo de tu viaje.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="service-item">
+                                <h4>En caso de emergencia</h4>
+                                <div class="line-dec"></div>
+                                <p>Contarás con el apoyo de nuestros anfitriones para ayudarte en cualquier caso de imprevisto, percance o emergencia que se presente durante tu viaje.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>                
+            </div>
+        </div>
+    </div>
+
+      {/* =========== TERCERA SECCIÓN ============= */}
+      <div class="parallax-content contact-content" id="contact-us">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="contact-form">
+                        <div class="row">
+                            <Form form={form} style={{width: '100%'}}>
+                                <Form.Item
+                                  {...formItemLayout2}
+                                >
+                                  <Input placeholder="Nombre" />
+                                </Form.Item>
+                                <Form.Item
+                                  {...formItemLayout2}
+                                >
+                                  <Input placeholder="Correo" />
+                                </Form.Item>
+                                <Form.Item
+                                  {...formItemLayout2}
+                                >
+                                  <Input placeholder="Celular" />
+                                </Form.Item>
+                                <Form.Item
+                                  {...formItemLayout2}
+                                >
+                                  <Select placeholder="Selecciona el lugar de viaje">
+                                    <Select.Option value="norteamerica">Norteamérica</Select.Option>
+                                    <Select.Option value="centroamerica">Centroamérica</Select.Option>
+                                    <Select.Option value="suramerica">Suramérica</Select.Option>
+                                    <Select.Option value="caribe">Caribe</Select.Option>
+                                    <Select.Option value="europa">Europa</Select.Option>
+                                    <Select.Option value="asia">Asia</Select.Option>
+                                    <Select.Option value="africa">África</Select.Option>
+                                    <Select.Option value="oceania">Oceanía</Select.Option>
+                                  </Select>
+                                </Form.Item>
+                                <Form.Item>
+                                  <Checkbox checked={checkNick} onChange={onCheckboxChange} style={{color: 'white'}}>
+                                    *Aceptar política de datos
+                                  </Checkbox>
+                                </Form.Item>
+                                <Form.Item>
+                                  <Button type="primary">
+                                    Enviar
+                                  </Button>
+                                </Form.Item>
+                              </Form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h2 style={{textShadow: 'rgb(143 143 143) 2px 2px 4px', color: 'white', fontSize: 38}}>
+                        SIGUE EN CONTACTO
+                    </h2>
+                    <p style={{textShadow: 'rgb(143 143 143) 2px 2px 4px', color: 'white'/* , fontSize: 28 */}}>
+                        Conectamos tus deseos y el tipo de plan en el que vas con el mejor anfitrión para ti, ya sea si quieres acompañamiento de alguien o si solo quieres contactarlo de vez en cuando.
+                    </p>
+                </div>
+            </div>
         </div>
       </div>
 
-      {/* =========== SEGUNDA SECCIÓN ============= */}
-      <Col xs={0} sm={0} md={24} style={{backgroundImage: `url(${secondImg})`, height: 700, backgroundSize: 'cover', width: '100%'}}>
-        <Row style={{textAlign: 'center', height: '100%', display: 'flex', background: 'rgba(0,0,0,0.3)'}}>
-          <Col xs={24} sm={24} md={12} style={{width: '50%', height: '100%', padding: '0px 20px 0px 20px', display: 'flex', justifyContent: 'flex-end', alignItems: 'center'}}>
-            <img src={Moon} alt="second"/>
-            <h1 style={{textShadow: 'rgb(143 143 143) 2px 2px 4px',position: 'absolute', width: 300, color: 'white', fontSize: 38, marginRight: 20}}>
-              ¿QUÉ HACEMOS?
-            </h1>
-          </Col>
-          <Col xs={24} sm={24} md={12} style={{width: '50%', height: '100%', padding: '0px 20px 0px 20px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', textAlign: 'left'}}>
-            <h2 style={{textShadow: 'rgb(143 143 143) 2px 2px 4px', color: 'white'/* , fontSize: 28 */}}>
-            Conectamos tus deseos y el tipo de plan en el que vas con el mejor anfitrión para ti, ya sea si quieres acompañamiento de alguien o si solo quieres contactarlo de vez en cuando.
-            </h2>
-            <ul>
-              <li><h2 style={{textShadow: 'rgb(143 143 143) 2px 2px 4px', color: 'white'}}>Idioma: te contactaremos con un anfitrión que hable tu mismo idioma y te pueda ayudar a planear y acompañar durante tu viaje.</h2></li>
-              <li><h2 style={{textShadow: 'rgb(143 143 143) 2px 2px 4px', color: 'white'}}>Destinos locales: Tendrás la oportunidad de conocer lugares increíbles y poco tradicionales de la mano de locales.</h2></li>
-              <li><h2 style={{textShadow: 'rgb(143 143 143) 2px 2px 4px', color: 'white'}}>Match: Dependiendo de tu tipo de viaje podrás escoger entres los diferentes anfitriones en tu lugar de destino y así decidir cual cumple con el objetivo de tu viaje.</h2></li>
-              <li><h2 style={{textShadow: 'rgb(143 143 143) 2px 2px 4px', color: 'white'}}>En caso de emergencia: Contarás con el apoyo de nuestros anfitriones para ayudarte en cualquier caso de imprevisto, percance o emergencia que se presente durante tu viaje.</h2></li>
-            </ul>
-          </Col>
-        </Row>
-      </Col>
-      <Col xs={24} sm={24} md={0} style={{backgroundImage: `url(${secondImg})`, height: 1150, backgroundSize: 'cover', width: '100%'}}>
-        <Row style={{textAlign: 'center', height: '100%', display: 'flex', background: 'rgba(0,0,0,0.3)'}}>
-          <Col xs={24} sm={24} md={12} style={{width: '50%', height: '100%', padding: '0px 20px 0px 20px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', textAlign: 'left'}}>
-            <h1 style={{textShadow: 'rgb(143 143 143) 2px 2px 4px', color: 'white', fontSize: 38, marginRight: 20}}>
-              ¿QUÉ HACEMOS?
-            </h1>
-            <h2 style={{textShadow: 'rgb(143 143 143) 2px 2px 4px', color: 'white'/* , fontSize: 28 */}}>
-            Conectamos tus deseos y el tipo de plan en el que vas con el mejor anfitrión para ti, ya sea si quieres acompañamiento de alguien o si solo quieres contactarlo de vez en cuando.
-            </h2>
-            <ul>
-              <li><h2 style={{textShadow: 'rgb(143 143 143) 2px 2px 4px', color: 'white'}}>Idioma: te contactaremos con un anfitrión que hable tu mismo idioma y te pueda ayudar a planear y acompañar durante tu viaje.</h2></li>
-              <li><h2 style={{textShadow: 'rgb(143 143 143) 2px 2px 4px', color: 'white'}}>Destinos locales: Tendrás la oportunidad de conocer lugares increíbles y poco tradicionales de la mano de locales.</h2></li>
-              <li><h2 style={{textShadow: 'rgb(143 143 143) 2px 2px 4px', color: 'white'}}>Match: Dependiendo de tu tipo de viaje podrás escoger entres los diferentes anfitriones en tu lugar de destino y así decidir cual cumple con el objetivo de tu viaje.</h2></li>
-              <li><h2 style={{textShadow: 'rgb(143 143 143) 2px 2px 4px', color: 'white'}}>En caso de emergencia: Contarás con el apoyo de nuestros anfitriones para ayudarte en cualquier caso de imprevisto, percance o emergencia que se presente durante tu viaje.</h2></li>
-            </ul>
-          </Col>
-        </Row>
-      </Col>
-
-      {/* =========== TERCERA SECCIÓN ============= */}
-      <Col xs={24} sm={24} md={24} style={{backgroundImage: `url(${secondImg})`, height: 400, backgroundSize: 'cover', width: '100%'}}>
-        <Row style={{textAlign: 'center', height: '100%', display: 'flex'}}>
-          <Col xs={24} sm={24} md={10} style={{backgroundImage: `url(${left})`, width: '50%', height: '100%'}}>
-            <Row style={{textAlign: 'left', width: '100%', height: '100%', display: 'flex', padding: '0px 20px 0px 20px', background: 'rgba(0,0,0,0.3)'}}>
-              <h1 style={{textShadow: 'rgb(143 143 143) 2px 2px 4px', color: 'white', fontSize: 38}}>
-              SIGUE EN CONTACTO
-              </h1>
-              <h2 style={{textShadow: 'rgb(143 143 143) 2px 2px 4px', color: 'white'/* , fontSize: 28 */}}>
-                Conectamos tus deseos y el tipo de plan en el que vas con el mejor anfitrión para ti, ya sea si quieres acompañamiento de alguien o si solo quieres contactarlo de vez en cuando.
-              </h2>
-            </Row>
-          </Col>
-          <Col xs={24} sm={24} md={14} style={{backgroundImage: `url(${firstImg})`, backgroundSize: 'cover', width: '50%', height: '100%'}}>
-            <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-start', height: '100%', padding: '0px 20px 0px 20px', background: 'rgba(0,0,0,0.3)', width: '100%', textAlign: 'left'}}>
-            <h2 style={{textShadow: 'rgb(143 143 143) 2px 2px 4px', color: 'white'}}>
-                Contacto
-              </h2>
-              <Form form={form} style={{width: '100%'}}>
-                <Form.Item
-                  {...formItemLayout2}
-                >
-                  <Input placeholder="Nombre" />
-                </Form.Item>
-                <Form.Item
-                  {...formItemLayout2}
-                >
-                  <Input placeholder="Correo" />
-                </Form.Item>
-                <Form.Item
-                  {...formItemLayout2}
-                >
-                  <Input placeholder="Celular" />
-                </Form.Item>
-                <Form.Item
-                  {...formItemLayout2}
-                >
-                  <Select placeholder="Selecciona el lugar de viaje">
-                    <Select.Option value="norteamerica">Norteamérica</Select.Option>
-                    <Select.Option value="centroamerica">Centroamérica</Select.Option>
-                    <Select.Option value="suramerica">Suramérica</Select.Option>
-                    <Select.Option value="caribe">Caribe</Select.Option>
-                    <Select.Option value="europa">Europa</Select.Option>
-                    <Select.Option value="asia">Asia</Select.Option>
-                    <Select.Option value="africa">África</Select.Option>
-                    <Select.Option value="oceania">Oceanía</Select.Option>
-                  </Select>
-                </Form.Item>
-                <Form.Item>
-                  <Checkbox checked={checkNick} onChange={onCheckboxChange} style={{color: 'white'}}>
-                    *Aceptar política de datos
-                  </Checkbox>
-                </Form.Item>
-                <Form.Item>
-                  <Button type="primary">
-                    Enviar
-                  </Button>
-                </Form.Item>
-              </Form>
-            </div>
-          </Col>
-        </Row>
-      </Col>
-
       {/* =========== CUARTA SECCIÓN ============= */}
-      <Col xs={0} sm={0} md={24}
-        style={{backgroundImage: `url(${ThirdImg})`,
-        height: 700,
-        backgroundSize: 'cover',
-        width: '100%'}}>
-          <Row style={{height: '100%', background: 'rgba(0,0,0,0.5)'}}>
-            <Col xs={24} sm={24} md={8} style={{display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', height: '100%'}}>
-              <img src={pink} width={'90%'} height={'70%'} alt="one" />
-              <h2 style={{textShadow: 'rgb(143 143 143) 2px 2px 4px', color: 'white', marginTop: 20}}>
-              Alejandra Paz, Bordeaux – Francia
-              </h2>
-            </Col>
-            <Col xs={24} sm={24} md={8} style={{display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', height: '100%'}}>
-              <img src={gray}width={'90%'} height={'70%'} alt="two"/>
-              <h2 style={{textShadow: 'rgb(143 143 143) 2px 2px 4px', color: 'white', marginTop: 20}}>
-              Eren Yildiz, Qatar - Qatar
-              </h2>
-            </Col>
-            <Col xs={24} sm={24} md={8} style={{display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', height: '100%'}}>
-              <img src={FourImg} width={'90%'} height={'70%'} alt="three"/>
-              <h2 style={{textShadow: 'rgb(143 143 143) 2px 2px 4px', color: 'white', marginTop: 20}}>
-              Vitor Sampaio, Fortaleza – Brazil:
-              </h2>
-            </Col>
-          </Row>
-      </Col>
+       <div class="parallax-content projects-content" id="portfolio">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="owl-testimonials" class="owl-carousel owl-theme">
+                        <div class="item">
+                            <div class="testimonials-item">
+                                <a href="img/1st-big-item.jpg" data-lightbox="image-1"><img src={alejandra} alt=""/></a>
+                                <div class="text-content">
+                                    <h4>Alejandra Paz, Bordeaux – Francia</h4>
+                                    <span>Mujer, 27 años, nació en Bogotá – Colombia, amante de un buen vino, una buena charla, le gusta caminar y conocer sitios nuevos, es muy descomplicada y conoce mucho de cultura, gastronomía y lugares para tomarse una cerveza.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="testimonials-item">
+                                <a href="img/2nd-big-item.jpg" data-lightbox="image-1"><img src={eren} alt=""/></a>
+                                <div class="text-content">
+                                    <h4>Eren Yildiz, Qatar - Qatar</h4>
+                                    <span>Hombre, 27 años, nació en Estambul-Turquía, habla inglés, español, curdo, turco, alemán. Le gusta viajar, ama Suramérica, conoce mucho de historia, gastronomía. Le gusta la fiesta, conocer personas nuevas. Ha conocido más de 18 países.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="testimonials-item">
+                                <a href="img/3rd-big-item.jpg" data-lightbox="image-1"><img src={vitor} alt=""/></a>
+                                <div class="text-content">
+                                    <h4>Vitor Sampaio, Fortaleza – Brazil</h4>
+                                    <span>Hombre, 26 años, nació en Fortaleza-Brasil, habla español, portugués e inglés. Le gusta el futbol, es emprendedor, es apasionado por el medio ambiente y la sostenibilidad. Conoce mucho de historia, deporte y cultura. Le gusta conocer personas nuevas.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="testimonials-item">
+                                <a href="img/5th-big-item.jpg" data-lightbox="image-1"><img src={camilo} alt=""/></a>
+                                <div class="text-content">
+                                    <h4>Camilo Bello, Taipéi – Taiwan</h4>
+                                    <span>Hombre, 32 años, nació en Bogotá-Colombia, habla español, ingles y mandarín. Es apasionado por la historia, la cultura, la gastronomía. Le gusta visitar parques, respirar aire libre y conocer las historias que tienen las personas.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="testimonials-item">
+                                <a href="img/6th-big-item.jpg" data-lightbox="image-1"><img src={angie} alt=""/></a>
+                                <div class="text-content">
+                                    <h4>Angie Rodriguez, Dubái – Emiratos Árabes</h4>
+                                    <span>Mujer, 28 años, nació en Bogotá-Colombia, habla español, inglés y algunas cosas en árabe, trabaja en un bar en Dubái, es muy divertida, descomplicada, amante de la fiesta y unos buenos cocteles.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="testimonials-item">
+                                <a href="img/2nd-big-item.jpg" data-lightbox="image-1"><img src={elaine} alt=""/></a>
+                                <div class="text-content">
+                                    <h4>Elaine Burke, Dublin – Irlanda</h4>
+                                    <span>Mujer, 27 años, nació en Dublin-Irlanda, habla inglés y español. Le gusta mucho viajar y la fiesta. Conoció la mayoría de países de Suramérica en un “bigtrip” que hizo. Estudia comunicación.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="testimonials-item">
+                                <a href="img/1st-big-item.jpg" data-lightbox="image-1"><img src={chiara} alt=""/></a>
+                                <div class="text-content">
+                                    <h4>Chiara y Simona, Mallorca-España</h4>
+                                    <span>Mujeres, 26 años, nacieron en Milán-Italia. Hablan español, inglés, alemán e italiano. Les encanta la gastronomía, los idiomas. Son muy divertidas, porque siempre tienen actividades para hacer. Son excelentes chef y siempre están en una actividad nueva.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
 
       {/* =========== QUINTA SECCIÓN ============= */}
-      <Col xs={0} sm={0} md={24} style={{backgroundImage: `url(${gray})`, height: 700, backgroundSize: 'cover', width: '100%'}}>
-        <Row style={{textAlign: 'center', height: '100%', display: 'flex', background: 'rgba(0,0,0,0.3)'}}>
-          <Col xs={24} sm={24} md={12} style={{width: '50%', height: '100%', padding: '0px 20px 0px 20px', display: 'flex', justifyContent: 'flex-end', alignItems: 'center'}}>
-            <img src={FourImg} width={'97%'} alt="second"/>
-            <h1 style={{textShadow: 'rgb(143 143 143) 2px 2px 4px',position: 'absolute', width: 300, color: 'white', fontSize: 38, marginRight: 10}}>
-              ¿QUÉ ES LO MEJOR DE TRAVEL TECH?
-            </h1>
-          </Col>
-          <Col xs={24} sm={24} md={12} style={{width: '50%', height: '100%', padding: '0px 20px 0px 20px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', textAlign: 'left'}}>
-            <h2 style={{textShadow: 'rgb(143 143 143) 2px 2px 4px', color: 'white'/* , fontSize: 28 */}}>
-            ¿Alguna vez has tenido un poco de temor de conocer algún lugar porque no conoces su idioma, su cultura, su religión o sus costumbres? O, Durante tus viajes ¿Te gusta conocer personas nuevas?
-            </h2>
-            <h2 style={{textShadow: 'rgb(143 143 143) 2px 2px 4px', color: 'white'/* , fontSize: 28 */}}>
-            TravelTech es la nueva red mundial que esta revolucionando la conexión e interacción entre anfitriones locales y viajeros.
-            Brindamos un acompañamiento pre, durante y post-viaje, asegurando una experiencia inolvidable en donde tendrás la oportunidad de conocer lugares increíbles con la ayuda de nuestros anfritriones que con su experiencia y pasión por ayudarle a los viajeros te harán vivir una mejor experiencia.
-            Nuestros Anfitriones tienen diferentes características por eso podrás hacer el match perfecto con quien se adecua más a las tuyas. Te brindarán un acompañamiento según tus necesidades.
-
-            </h2>
-          </Col>
-        </Row>
-      </Col>
+      <div class="parallax-content tabs-content" id="better">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <img src={FourImg} width={'100%'} alt="second"/>
+                </div>
+                <div class="col-md-6">
+                    <h2 style={{textShadow: 'rgb(143 143 143) 2px 2px 4px', color: 'white', fontSize: 30}}>
+                        ¿QUÉ ES LO MEJOR DE TRAVEL TECH?
+                    </h2>
+                    <p style={{color: 'white'}}>
+                        ¿Alguna vez has tenido <b>un poco de temor de conocer</b> algún lugar porque no conoces su idioma, su cultura, su religión o sus costumbres? O, Durante tus viajes <b> ¿Te gusta conocer personas nuevas? </b> <br/><br/>
+                        TravelTech es la nueva <b>red mundial</b> que esta revolucionando la conexión e interacción entre <b>anfitriones locales y viajeros</b>.
+                        Brindamos un acompañamiento pre, durante y post-viaje, asegurando una experiencia inolvidable en donde tendrás la oportunidad de <b>conocer lugares increíbles </b> con la <b>ayuda</b> de nuestros anfritriones que con su experiencia y pasión por ayudarle a los viajeros <b> te harán vivir una mejor experiencia </b>. <br/><br/>
+                        Nuestros Anfitriones tienen diferentes características por eso podrás hacer <b>el match perfecto</b> con quien se adecua más a las tuyas. Te brindarán un acompañamiento según tus necesidades.
+                    </p>
+                </div>
+            </div>
+        </div>
+      </div>
 
       {/* =========== SEXTA SECCIÓN ============= */}
-      <Col xs={24} sm={24} md={24} style={{backgroundImage: `url(${FourImg})`, backgroundSize: 'cover', height: 1000, objectFit: 'fit', width: '100%'}}>
+      <Col xs={24} sm={24} md={24} style={{backgroundImage: `url(${final})`, backgroundSize: 'cover', height: 1000, objectFit: 'fit', width: '100%'}} id="anfitrion">
         <div style={{ height: '100%', paddingRight: '20%', paddingLeft: '20%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
         <h1 style={{color: 'white', textShadow: 'rgb(143 143 143) 2px 2px 4px', textAlign: 'center', marginBottom: 20}}>Our hosts will be your friends helping you enjoy your trip like a local</h1>
         <div style={{ background: 'rgba(0, 0, 0, 0.7)', borderRadius: 6, paddingBottom: 20, paddingLeft: 20, paddingRight: 20, maxWidth: 600, minWidth: 300, width: '100%', paddingTop: 10}}>
@@ -421,6 +477,27 @@ const Main = (props) => {
         </div>
         </div>
       </Col>
+    
+
+      <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="primary-button">
+                        <a href="#home">Ir Arriba</a>
+                    </div>
+                    <ul>
+                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                        <li><a href="#"><i class="fa fa-google"></i></a></li>
+                        <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                    </ul>
+                    <p>Copyright &copy; 2020 Travel Tech</p>
+                </div>
+            </div>
+        </div>
+      </footer>
     </div>
   );
 }

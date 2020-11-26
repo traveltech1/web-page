@@ -37,12 +37,6 @@ const Main = (props) => {
   const [form] = Form.useForm();
   const history = useHistory();
 
-  const toFormRef = useRef(null)
-
-  const scrollToBottom = () => {
-    toFormRef.current.scrollIntoView({ behavior: "smooth" })
-  }
-
   const onFinish = async (values) => {
     setCheckFields(false);
     setBadDate(false);
@@ -374,7 +368,7 @@ const Main = (props) => {
       <Col xs={24} sm={24} md={24} style={{backgroundImage: `url(${final})`, backgroundSize: 'cover', height: 1000, objectFit: 'fit', width: '100%'}} id="anfitrion">
         <div style={{ height: '100%', paddingRight: '20%', paddingLeft: '20%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
         <h1 style={{color: 'white', textShadow: 'rgb(143 143 143) 2px 2px 4px', textAlign: 'center', marginBottom: 20}}>Our hosts will be your friends helping you enjoy your trip like a local</h1>
-        <div ref={toFormRef} style={{ background: 'rgba(0, 0, 0, 0.7)', borderRadius: 6, paddingBottom: 20, paddingLeft: 20, paddingRight: 20, maxWidth: 600, minWidth: 300, width: '100%', paddingTop: 10}}>
+        <div style={{ background: 'rgba(0, 0, 0, 0.7)', borderRadius: 6, paddingBottom: 20, paddingLeft: 20, paddingRight: 20, maxWidth: 600, minWidth: 300, width: '100%', paddingTop: 10}}>
         {cities && tripTypes &&
           <Form
           form={form}

@@ -4,7 +4,7 @@ import {
   Input,
   Button,
   Select,
-  DatePicker, Row, Col } from 'antd';
+  Card, Row, Col } from 'antd';
   import React, { useState, useEffect } from 'react';
 import firstImg from '../../assets/images/pexelsphoto114251.jpeg';
 import logo from '../../assets/images/logo.png';
@@ -13,12 +13,16 @@ import ThirdImg from '../../assets/images/pexelsphoto1054289.jpeg';
 import FourImg from '../../assets/images/pexelsphoto167684.jpeg';
 import { endpoints } from '../../endpoints/endpoints'
 import moment from 'moment';
+import Coverflow from 'react-coverflow';
+
+const { Meta } = Card;
 
 const monthFormat = 'MM/YYYY';
 
 function Payment(props) {
   const [componentSize, setComponentSize] = useState('large');
   const [host, setHost] = useState(null);
+  const [selected, setSelected] = useState(null);
 
   const [form] = Form.useForm();
 
@@ -69,6 +73,7 @@ function Payment(props) {
         const result = await endpoints.hosts.getHosts();
         setHost(result);
     };
+    buildEpaycoButton(50000);
     fetchData();
   }, []);
 
@@ -76,6 +81,30 @@ function Payment(props) {
     setComponentSize(size);
   };
 
+ const onBooking = async () => {
+    const { name, city, email, endDate, startDate, tripType } = prevData;
+    if(selected) {
+      const result = await endpoints.bookingRequest.postBooking({
+        "guest_name": name,
+        "guest_email": email,
+        "guest_phone": 0,
+        "destination": city.toString(),
+        "start_date": moment(startDate).format('YYYY-MM-DD'),
+        "end_date": moment(endDate).format('YYYY-MM-DD'),
+        "host": (selected.id).toString(),
+        "trip_type": tripType.toString(),
+        "total": 50000,
+/*         "payment": {
+          "id": "string",
+          "payment_id": "string",
+          "status": "string",
+          "method": "string",
+          "type": "string"
+        }, */
+      });
+    }
+  };
+ 
   const formItemLayout = {
     labelCol: {
       xs: {
@@ -120,9 +149,9 @@ function Payment(props) {
         <h2 style={{ height: '100%', fontSize: 30, paddingInlineStart: 40, margin: 14, marginTop: 9, verticalAlign: 'center', color: 'white'}}>TravelTech</h2>
       </div>
       <div style={{backgroundImage: `url(${ThirdImg})`, backgroundSize: 'cover', height: 800, objectFit: 'fit', width: '100%'}}>
-        <div style={{ height: '100%', paddingTop: '3%', paddingRight: '20%', paddingLeft: '20%'}}>
-        <h2 style={{color: 'white', textShadow: 'rgb(143 143 143) 2px 2px 4px', textAlign: 'center', fontSize: 36, marginBottom: 50}}>Our hosts will be your friends helping you enjoy your trip like a local</h2>
-          <Form id='firstDiv'
+        <div style={{ height: '100%', paddingTop: '3%', paddingRight: '20%', paddingLeft: '20%', textAlign: 'center'}}>
+        <h2 style={{color: 'white', textShadow: 'rgb(143 143 143) 2px 2px 4px', textAlign: 'center', fontSize: 36, marginBottom: 50}}>Selecciona a tu anfitrión</h2>
+          <Form
           labelCol={{
             span: 5,
           }}
@@ -133,7 +162,7 @@ function Payment(props) {
           initialValues={{
             size: componentSize,
           }}
-          style={{ background: 'rgba(0, 0, 0, 0.7)', borderRadius: 6, paddingTop: 50, paddingBottom: 20}}
+          style={{ background: 'rgba(0, 0, 0, 0.3)', display: 'flex', flexDirection: 'row', borderRadius: 6, paddingTop: 50, paddingBottom: 20, overflowX: 'auto'}}
           onValuesChange={onFormLayoutChange}
           size={componentSize}
           form={form}
@@ -141,11 +170,29 @@ function Payment(props) {
           name="register"
           onFinish={onFinish}
         >
-
+          {
+            host?.map((item,index) => {
+              return (
+                <Col key={item.id} style={{marginLeft: 10, marginRight: 10}}>
+                  {console.log('AJAAAA', host)}
+                  <Card
+                    onClick={() => setSelected(item)}
+                    hoverable
+                    style={{ width: 240, borderRadius: 10, borderColor: '#EF9128', borderWidth: item == selected ? 5:0 }}
+                    cover={<img alt="example" style={{borderRadius: 10}} src={item.imageUrl} />}
+                  >
+                    <Meta title={item.name} description={`${item.email}`} />
+                  </Card>
+                </Col>
+              )
+            })
+          }
         </Form>
-
-        <Button onClick={() => buildEpaycoButton(50000)} style={{backgroundColor: '#f29720', fontSize: 14, height: 60, borderColor: '#f29720', color: 'white', fontWeight: '500', paddingTop: 5, width: 200}} shape="round" size={'large'}>
-          PAGAR
+        <Form id='firstDiv' style={{marginTop: 20}}>
+          {/* */}
+        </Form>
+          <Button onClick={onBooking} style={{backgroundColor: '#f29720', fontSize: 14, height: 60, marginTop: 20, borderColor: '#f29720', color: 'white', fontWeight: '500', paddingTop: 5, width: 200}} shape="round" size={'large'}>
+            Reserva
           </Button>
         </div>
       </div>

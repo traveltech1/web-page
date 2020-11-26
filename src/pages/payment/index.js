@@ -4,7 +4,7 @@ import {
   Input,
   Button,
   Select,
-  DatePicker, Row, Col } from 'antd';
+  Card, Row, Col } from 'antd';
   import React, { useState, useEffect } from 'react';
 import firstImg from '../../assets/images/pexelsphoto114251.jpeg';
 import logo from '../../assets/images/logo.png';
@@ -13,26 +13,30 @@ import ThirdImg from '../../assets/images/pexelsphoto1054289.jpeg';
 import FourImg from '../../assets/images/pexelsphoto167684.jpeg';
 import { endpoints } from '../../endpoints/endpoints'
 import moment from 'moment';
+import Coverflow from 'react-coverflow';
+
+const { Meta } = Card;
 
 const monthFormat = 'MM/YYYY';
 
-function Payment() {
+function Payment(props) {
   const [componentSize, setComponentSize] = useState('large');
   const [host, setHost] = useState(null);
+  const [selected, setSelected] = useState(null);
+  const [showPay, setShowPay] = useState(true);
 
   const [form] = Form.useForm();
 
-
+  const prevData = localStorage.getItem('values') !== undefined &&  JSON.parse(localStorage.getItem('values'));
 
   function buildEpaycoButton(amount) {
-    console.log('EPAYCOOO', window.ePayco)    
     
     const url = 'https://checkout.epayco.co/checkout.js';
   
     const script = document.createElement('script');
     script.src =  url;
     script.async = true;
-    script.setAttribute('data-epayco-key', '65afb5be48a6a50793901a14bc038c2f');
+    script.setAttribute('data-epayco-key', '072e6c48d7bfa1027afde26345d20d4a');
     script.setAttribute('class', 'epayco-button');
     script.setAttribute('data-epayco-amount', amount);
     script.setAttribute('data-epayco-tax', '0');
@@ -43,7 +47,7 @@ function Payment() {
     script.setAttribute('data-epayco-country', 'CO');
     script.setAttribute('data-epayco-test', 'true');
     script.setAttribute('data-epayco-external', 'false');
-    script.setAttribute('data-epayco-response', '');
+    script.setAttribute('data-epayco-response', `${window.location.origin}/test.html`);
     script.setAttribute('data-epayco-confirmation', '');
     script.setAttribute('data-epayco-button', 'https://369969691f476073508a-60bf0867add971908d4f26a64519c2aa.ssl.cf5.rackcdn.com/btns/boton_carro_de_compras_epayco4.png');
 
@@ -54,7 +58,6 @@ function Payment() {
     return () => {
       // document.body.removeChild(script);
       document.getElementById('firstDiv').removeChild(script);
-      
     }
   }
 
@@ -74,6 +77,34 @@ function Payment() {
     setComponentSize(size);
   };
 
+ const onBooking = async () => {
+    const { name, city, email, endDate, startDate, tripType } = prevData;
+    if(selected) {
+      const result = await endpoints.bookingRequest.postBooking({
+        "guest_name": name,
+        "guest_email": email,
+        "guest_phone": 0,
+        "destination": city.toString(),
+        "start_date": moment(startDate).format('YYYY-MM-DD'),
+        "end_date": moment(endDate).format('YYYY-MM-DD'),
+        "host": (selected.id).toString(),
+        "trip_type": tripType.toString(),
+        "total": 50000,
+/*         "payment": {
+          "id": "string",
+          "payment_id": "string",
+          "status": "string",
+          "method": "string",
+          "type": "string"
+        }, */
+      });
+      if(result) {
+        setShowPay(false);
+        buildEpaycoButton(50000);
+      }
+    }
+  };
+ 
   const formItemLayout = {
     labelCol: {
       xs: {
@@ -118,9 +149,9 @@ function Payment() {
         <h2 style={{ height: '100%', fontSize: 30, paddingInlineStart: 40, margin: 14, marginTop: 9, verticalAlign: 'center', color: 'white'}}>TravelTech</h2>
       </div>
       <div style={{backgroundImage: `url(${ThirdImg})`, backgroundSize: 'cover', height: 800, objectFit: 'fit', width: '100%'}}>
-        <div style={{ height: '100%', paddingTop: '3%', paddingRight: '20%', paddingLeft: '20%'}}>
-        <h2 style={{color: 'white', textShadow: 'rgb(143 143 143) 2px 2px 4px', textAlign: 'center', fontSize: 36, marginBottom: 50}}>Our hosts will be your friends helping you enjoy your trip like a local</h2>
-          <Form id='firstDiv'
+        <div style={{ height: '100%', paddingTop: '3%', paddingRight: '20%', paddingLeft: '20%', textAlign: 'center'}}>
+        <h2 style={{color: 'white', textShadow: 'rgb(143 143 143) 2px 2px 4px', textAlign: 'center', fontSize: 36, marginBottom: 50}}>Selecciona a tu anfitrión</h2>
+          <Form
           labelCol={{
             span: 5,
           }}
@@ -131,7 +162,7 @@ function Payment() {
           initialValues={{
             size: componentSize,
           }}
-          style={{ background: 'rgba(0, 0, 0, 0.7)', borderRadius: 6, paddingTop: 50, paddingBottom: 20}}
+          style={{display: 'flex', flexDirection: 'row', borderRadius: 6, paddingTop: 50, paddingBottom: 20, overflowX: 'auto'}}
           onValuesChange={onFormLayoutChange}
           size={componentSize}
           form={form}
@@ -139,39 +170,29 @@ function Payment() {
           name="register"
           onFinish={onFinish}
         >
-        <Form.Item label={<h3 style={{textShadow: 'rgb(143 143 143) 2px 2px 4px', color: 'white', fontSize: 18}}>Anfitrión</h3>}>
-            <Select placeholder="Selecciona un anfitrión">
-              {
-                host?.map(hst =>{
-                  return (
-                  <Select.Option key={hst.id} value={hst.id}>{hst.name}</Select.Option>
-                  )
-                })
-              }
-            </Select>
-          </Form.Item>
-          <h3 style={{textShadow: 'rgb(143 143 143) 2px 2px 4px', color: 'white', fontSize: 28, marginLeft: '5%', marginBottom: 30}}>Datos de Pago</h3>
-          <Form.Item label={<h3 style={{textShadow: 'rgb(143 143 143) 2px 2px 4px', color: 'white', fontSize: 18}}>Nombre</h3>}>
-            <Input placeholder="Jhoe Donald"/>
-          </Form.Item>
-          <Form.Item label={<h3 style={{textShadow: 'rgb(143 143 143) 2px 2px 4px', color: 'white', fontSize: 18}}>No Tarjeta</h3>}>
-            <Input placeholder="4555 0000 4444 7777"/>
-          </Form.Item>
-          <Form.Item label={<h3 style={{textShadow: 'rgb(143 143 143) 2px 2px 4px', color: 'white', fontSize: 18}}>CVV</h3>}>
-            <Input style={{width: 200}}/>
-          </Form.Item>
-          <Form.Item label={<h3 style={{textShadow: 'rgb(143 143 143) 2px 2px 4px', color: 'white', fontSize: 18}}>Fecha Exp</h3>}>
-            <DatePicker style={{width: 200}} defaultValue={moment('01/2015', monthFormat)} format={monthFormat} picker="month" />
-          </Form.Item>
-          <Form.Item style={{textAlign: 'center', width: '90vw'}}>
-            
-
-          </Form.Item>
+          {
+            host?.map((item,index) => {
+              return (
+                <Col key={item.id} style={{marginLeft: 10, marginRight: 10}}>
+                  <Card
+                    onClick={() => setSelected(item)}
+                    hoverable
+                    style={{ width: 240, borderRadius: 10, borderColor: '#EF9128', borderWidth: item == selected ? 5:0 }}
+                    cover={<img alt="example" style={{borderRadius: 10}} src={item.imageUrl} />}
+                  >
+                    <Meta title={item.name} description={`${item.email}`} />
+                  </Card>
+                </Col>
+              )
+            })
+          }
         </Form>
-
-        <Button onClick={() => buildEpaycoButton(50000)} style={{backgroundColor: '#f29720', fontSize: 14, height: 60, borderColor: '#f29720', color: 'white', fontWeight: '500', paddingTop: 5, width: 200}} shape="round" size={'large'}>
-          PAGAR
-          </Button>
+        <Form id='firstDiv' style={{marginTop: 20}}>
+          {/* */}
+        </Form>
+          {showPay && <Button onClick={onBooking} style={{backgroundColor: '#f29720', fontSize: 14, height: 60, marginTop: 20, borderColor: '#f29720', color: 'white', fontWeight: '500', paddingTop: 5, width: 200}} shape="round" size={'large'}>
+            Reserva
+          </Button>}
         </div>
       </div>
     </div>

@@ -5,7 +5,7 @@ import {
   Button,
   Radio,
   Select,
-  Cascader,
+  Alert,
   DatePicker,
   Row, Col, Checkbox
  } from 'antd';
@@ -22,7 +22,7 @@ import vitor from '../../assets/images/vitor.jpg';
 import FourImg from '../../assets/images/4.jpg';
 import left from '../../assets/images/pexelsphoto1252869.jpeg';
 import { endpoints } from '../../endpoints/endpoints'
-import { BrowserRouter as Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import moment from 'moment';
 
 
@@ -31,13 +31,34 @@ const Main = (props) => {
   const [cities, setCities] = useState(null);
   const [tripTypes, setTripTypes] = useState(null);
   const [checkNick, setCheckNick] = useState(false);
+  const [checkFields, setCheckFields] = useState(false);
+  const [badDate, setBadDate] = useState(false);
 
   const [form] = Form.useForm();
+  const history = useHistory();
+
+  const toFormRef = useRef(null)
+
+  const scrollToBottom = () => {
+    toFormRef.current.scrollIntoView({ behavior: "smooth" })
+  }
 
   const onFinish = async (values) => {
-    console.log('Received values of form: ', values);
+    setCheckFields(false);
+    setBadDate(false);
     const values2 = await form.validateFields();
-      console.log('Success:', values2);
+    const leftFields = Object.values(values2).includes(undefined);
+    if (leftFields) {
+      setCheckFields(true);
+    } else {
+      if (values2.endDate > values2.startDate) {
+        setBadDate(false);
+        localStorage.setItem('values', JSON.stringify(values2))
+        history.push('/payment');
+     } else {
+       setBadDate(true);
+     }
+    }
   };
 
   const onFinishFailed = ({ values, errorFields, outOfDate }) => {
@@ -78,34 +99,6 @@ const Main = (props) => {
     fetchData();
   }, []);
 
-  const onCheck = async () => {
-    try {
-      const values = await form.validateFields();
-      console.log('Success:', values);
-    } catch (errorInfo) {
-      console.log('Failed:', errorInfo);
-    }
-  };
-
-  const onEpayco = () => {
-    console.log('EPAYCOOO', window.ePayco)
-/*     let epa = window.ePayco.checkout;
-    epa.open({
-      p_key: 'a1c7200f0e2029d11b62bfd863422d5db10a8397',
-      'data-epayco-key':'65afb5be48a6a50793901a14bc038c2f',
-      'data-epayco-amount':'142800',
-      'data-epayco-tax':'22800',
-      'data-epayco-tax-base':'120000',
-      'data-epayco-name':'Solicitud de anfitrion',
-      'data-epayco-description':'Solicitud de anfitrion',
-      'data-epayco-currency':'cop',
-      'data-epayco-country':'CO',
-      'data-epayco-test':'true',
-      'data-epayco-external':'true'
-
-    });
-    // window.ePayco.open; */
-  }
 
   const validateMessages = {
     required: '${label} is required!',
@@ -124,19 +117,15 @@ const Main = (props) => {
     },
   }
 
-  const formTailLayout2 = {
-    labelCol: {
-      span: 4,
-    },
-    wrapperCol: {
-      span: 8,
-      offset: 4,
-    },
-  };
 
   const onCheckboxChange = (e) => {
     setCheckNick(e.target.checked);
   };
+
+  function disabledDate(current) {
+    // Can not select days before today and today
+    return current && current < moment().endOf('day');
+  }
 
   return (
     <div style={{
@@ -385,7 +374,7 @@ const Main = (props) => {
       <Col xs={24} sm={24} md={24} style={{backgroundImage: `url(${final})`, backgroundSize: 'cover', height: 1000, objectFit: 'fit', width: '100%'}} id="anfitrion">
         <div style={{ height: '100%', paddingRight: '20%', paddingLeft: '20%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
         <h1 style={{color: 'white', textShadow: 'rgb(143 143 143) 2px 2px 4px', textAlign: 'center', marginBottom: 20}}>Our hosts will be your friends helping you enjoy your trip like a local</h1>
-        <div style={{ background: 'rgba(0, 0, 0, 0.7)', borderRadius: 6, paddingBottom: 20, paddingLeft: 20, paddingRight: 20, maxWidth: 600, minWidth: 300, width: '100%', paddingTop: 10}}>
+        <div ref={toFormRef} style={{ background: 'rgba(0, 0, 0, 0.7)', borderRadius: 6, paddingBottom: 20, paddingLeft: 20, paddingRight: 20, maxWidth: 600, minWidth: 300, width: '100%', paddingTop: 10}}>
         {cities && tripTypes &&
           <Form
           form={form}
@@ -409,11 +398,11 @@ const Main = (props) => {
               },
             ]}
             >Nombre</h3>}>
-            <Input minLength={5} width={'100%'} placeholder="Jhoe Donald"/>
+            <Input required minLength={5} width={'100%'} placeholder="Jhoe Donald"/>
           </Form.Item>
           <Form.Item
             style={{marginTop: -20}}
-            name={['user', 'email']}
+            name='email'
             label={<h3 style={{textShadow: 'rgb(143 143 143) 2px 2px 4px', color: 'white', fontSize: 18, marginBottom: -10}}
             rules={[
               {
@@ -422,7 +411,7 @@ const Main = (props) => {
               }
             ]}
             >Email</h3>}>
-            <Input  type="email" placeholder="jhoe@gmail.com"/>
+            <Input required type="email" placeholder="jhoe@gmail.com"/>
           </Form.Item>
           <Form.Item
             name="city"
@@ -440,33 +429,35 @@ const Main = (props) => {
           </Form.Item>
           <Form.Item
             style={{marginTop: -20}}
-            label={<h3 style={{textShadow: 'rgb(143 143 143) 2px 2px 4px', color: 'white', fontSize: 18, marginBottom: -10}}
             name="startDate"
+            label={<h3 style={{textShadow: 'rgb(143 143 143) 2px 2px 4px', color: 'white', fontSize: 18, marginBottom: -10}}
             >Fecha Inicio</h3>}>
-            <DatePicker value={moment()} required style={{maxWidth: 250, width: '100%'}} placeholder="Selecciona fecha inicial" />
+            <DatePicker disabledDate={disabledDate} value={moment()} required style={{maxWidth: 250, width: '100%'}} placeholder="Selecciona fecha inicial" />
           </Form.Item>
           <Form.Item
             style={{marginTop: -20}}
-            label={<h3 style={{textShadow: 'rgb(143 143 143) 2px 2px 4px', color: 'white', fontSize: 18, marginBottom: -10}}
             name="endDate"
+            label={<h3 style={{textShadow: 'rgb(143 143 143) 2px 2px 4px', color: 'white', fontSize: 18, marginBottom: -10}}
             >Fecha Fin</h3>}>
-            <DatePicker value={moment().add(3, 'days')} required style={{maxWidth: 250, width: '100%'}} placeholder="Selecciona fecha final" />
+            <DatePicker disabledDate={disabledDate} value={moment().add(3, 'days')} required style={{maxWidth: 250, width: '100%'}} placeholder="Selecciona fecha final" />
           </Form.Item>
           <Form.Item
+            name="tripType"
             style={{marginTop: -20}}
             label={<h3 style={{textShadow: 'rgb(143 143 143) 2px 2px 4px', color: 'white', fontSize: 18, marginBottom: -10}}
-            name="tripType"
             >Tipo de viaje</h3>}>
-            <Select required defaultValue={tripTypes[0].value} placeholder="Selecciona el tipo de viaje">
+            <Select required placeholder="Selecciona el tipo de viaje">
               {
                   tripTypes?.map(trip =>{
                     return (
-                    <Select.Option key={trip.id} value={trip.value}>{trip.name}</Select.Option>
+                    <Select.Option key={trip.id} value={trip.id}>{trip.name}</Select.Option>
                     )
                   })
               }
             </Select>
           </Form.Item>
+          {checkFields && <Alert message="Hay campos sin completar" type="error" showIcon style={{marginBottom: 20}} />}
+          {badDate &&<Alert message="La fecha de inicio no puede ser mayor a la fecha final" type="warning" showIcon style={{marginBottom: 20}} />}
           <Form.Item style={{textAlign: 'center', width: '100%'}}>
             <Button htmlType="submit" /* onClick={() => props.history.push('/payment')} */ style={{backgroundColor: '#f23e3e', fontSize: 14, height: 50, borderColor: '#f23e3e', color: 'white', fontWeight: '500', paddingTop: 5, width: 200, alignSelf: 'center'}} shape="round" size={'large'}>
               REQUEST A HOST

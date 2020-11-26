@@ -47,8 +47,8 @@ function Payment(props) {
     script.setAttribute('data-epayco-country', 'CO');
     script.setAttribute('data-epayco-test', 'true');
     script.setAttribute('data-epayco-external', 'false');
-    script.setAttribute('data-epayco-response', 'http://localhost:3000/confirmation');
-    // script.setAttribute('data-epayco-response', 'https://travel-web.vercel.app/payment');
+
+    script.setAttribute('data-epayco-response', 'https://travel-web.vercel.app/payment');
     script.setAttribute('data-epayco-confirmation', '');
     script.setAttribute('data-epayco-button', 'https://369969691f476073508a-60bf0867add971908d4f26a64519c2aa.ssl.cf5.rackcdn.com/btns/boton_carro_de_compras_epayco4.png');
 
@@ -98,10 +98,11 @@ function Payment(props) {
           "method": "string",
           "type": "string"
         }, */
-
-      }).then( () => 
-        buildEpaycoButton(50000)
-      );
+      });
+      if(result) {
+        setShowPay(false);
+        buildEpaycoButton(50000);
+      }
     }
   };
  

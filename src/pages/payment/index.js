@@ -36,14 +36,14 @@ function Payment(props) {
     const script = document.createElement('script');
     script.src =  url;
     script.async = true;
-    script.setAttribute('data-epayco-key', '072e6c48d7bfa1027afde26345d20d4a');
+    script.setAttribute('data-epayco-key', '285129d3977d71c1b02eb572422f1c1f');    
     script.setAttribute('class', 'epayco-button');
     script.setAttribute('data-epayco-amount', amount);
     script.setAttribute('data-epayco-tax', '0');
     script.setAttribute('data-epayco-tax-base', '0');
     script.setAttribute('data-epayco-name', 'Solicitud de anfitrion');
     script.setAttribute('data-epayco-description', 'Solicitud de anfitrion');
-    script.setAttribute('data-epayco-currency', 'cop');
+    script.setAttribute('data-epayco-currency', 'usd');  
     script.setAttribute('data-epayco-country', 'CO');
     script.setAttribute('data-epayco-test', 'true');
     script.setAttribute('data-epayco-external', 'false');
@@ -89,7 +89,7 @@ function Payment(props) {
         "end_date": moment(endDate).format('YYYY-MM-DD'),
         "host": (selected.id).toString(),
         "trip_type": tripType.toString(),
-        "total": 50000,
+        "total": 50,
 /*         "payment": {
           "id": "string",
           "payment_id": "string",
@@ -100,7 +100,7 @@ function Payment(props) {
       });
       if(result) {
         setShowPay(false);
-        buildEpaycoButton(50000);
+        buildEpaycoButton(50);
       }
     }
   };
